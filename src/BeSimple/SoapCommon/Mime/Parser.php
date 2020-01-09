@@ -50,6 +50,11 @@ class Parser
         $content = '';
         $currentPart = $multipart;
         $lines = preg_split("/(\r\n)/", $mimeMessage);
+        
+        if(count($lines) === 1){
+			$lines = preg_split("/(\n)/", $mimeMessage);	
+		}	
+        
         foreach ($lines as $line) {
             // ignore http status code and POST *
             if (substr($line, 0, 5) == 'HTTP/' || substr($line, 0, 4) == 'POST') {
